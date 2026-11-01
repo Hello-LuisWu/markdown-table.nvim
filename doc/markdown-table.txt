@@ -1,0 +1,65 @@
+*markdown-table.nvim*  Convert clipboard and selected tables to Markdown
+
+==============================================================================
+INTRODUCTION                                                   *markdown-table*
+
+markdown-table.nvim converts HTML, TSV, CSV, and Markdown tables into aligned
+Markdown tables. It can read the system clipboard or convert a Visual selection.
+
+==============================================================================
+SETUP                                                         *markdown-table-setup*
+
+Call setup() in your Neovim configuration:
+
+    require("markdown_table").setup({})
+
+Options:
+
+    require("markdown_table").setup({
+      mappings = {
+        convert = "<leader>mt",
+        html = "<leader>mh",
+        format = "<leader>mf",
+      },
+      clipboard = { prefer_html = true },
+      default_alignment = "left",
+      min_column_width = 3,
+      notify = true,
+    })
+
+Set an individual mapping to false to disable it. Set mappings = false to disable all default mappings.
+
+==============================================================================
+COMMANDS                                                    *markdown-table-commands*
+
+:MarkdownTable          Convert the system clipboard table.
+:MarkdownTableHTML      Force HTML clipboard conversion.
+:MarkdownTableVisual    Convert the previous Visual selection.
+:MarkdownTableFormat    Align the Markdown table under the cursor.
+
+==============================================================================
+MAPPINGS                                                    *markdown-table-mappings*
+
+Normal mode:
+  <leader>mt             Convert clipboard table.
+  <leader>mh             Force HTML clipboard conversion.
+  <leader>mf             Format the Markdown table under the cursor.
+
+Visual mode:
+  <leader>mt             Convert the selected table text.
+
+==============================================================================
+CLIPBOARD                                                  *markdown-table-clipboard*
+
+HTML clipboard data is preferred when available. The plugin tries pbpaste on
+macOS, wl-paste then xclip on Linux, and PowerShell/Windows Forms on Windows.
+If HTML clipboard data is unavailable, it falls back to the + register text.
+
+==============================================================================
+LIMITATIONS                                                *markdown-table-limitations*
+
+The HTML parser targets common copied web tables. It is not a full browser DOM
+implementation; complex CSS layouts, JavaScript-rendered content, and deeply
+nested tables may not be represented exactly.
+
+==============================================================================

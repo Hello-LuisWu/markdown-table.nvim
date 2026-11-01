@@ -1,0 +1,2 @@
+-- This plugin intentionally does not call setup() automatically.
+-- Configure it with require("markdown_table").setup({...}) in your init.lua.
