@@ -1,20 +1,37 @@
 # markdown-table.nvim
 
-将系统剪贴板或 Visual 选区中的 HTML、TSV、CSV 表格转换为排版整齐的 Markdown 表格，并格式化已有 Markdown 表格。
+- [markdown-table.nvim](#markdown-table.nvim)
+  - [Features](#features)
+  - [Installation](#installation)
+    - [Native vim.pack](#native-vim.pack)
+    - [lazy.nvim](#lazy.nvim)
+  - [Default Keymaps](#default-keymaps)
+  - [Configuration](#configuration)
+  - [HTML Clipboard Support](#html-clipboard-support)
+  - [Visual Mode](#visual-mode)
+  - [Testing](#testing)
+  - [Limitations](#limitations)
+  - [License](#license)
 
-## 功能
+> 中文用户可以通过 [README.zh-CN.md](./README.zh-CN.md) 阅读中文说明。
 
-- 从系统剪贴板读取 HTML 表格（优先）或纯文本 TSV/CSV。
-- 转换 Visual 选区中的 HTML、TSV、CSV 数据。
-- 自动计算列宽，使用 `strdisplaywidth()` 处理中文等宽字符。
-- 处理 HTML 实体、单元格内标签、`rowspan` / `colspan`、CSV 引号和转义逗号。
-- 转义 Markdown 单元格中的 `|`，将单元格换行转换为 `<br>`。
-- 格式化光标所在的 Markdown 表格，并保留列对齐标记。
-- 不依赖 lazy.nvim、plenary.nvim 或其他插件。
+Convert HTML, TSV, and CSV tables from your system clipboard or Visual selection into neatly formatted Markdown tables. Also supports formatting existing Markdown tables.
 
-## 安装
+## Features
 
-### Neovim 原生 vim.pack
+- Read HTML tables from the system clipboard (preferred), with automatic fallback to plain-text TSV/CSV.
+- Convert HTML, TSV, and CSV data from Visual selections.
+- Automatically calculate column widths using strdisplaywidth() to correctly handle CJK and other wide characters.
+- Handle HTML entities, inline cell tags, rowspan / colspan, CSV quoting, and escaped commas.
+- Escape | characters in Markdown cells and convert cell line breaks to <br>.
+- Format the Markdown table under the cursor while preserving column alignment
+markers.
+
+No dependencies on lazy.nvim, plenary.nvim, or any other plugins.
+
+## Installation
+
+### Native vim.pack
 
 ```lua
 vim.pack.add({
@@ -35,23 +52,25 @@ require("markdown_table").setup({})
 }
 ```
 
-## 默认快捷键
+## Default Keymaps
 
-| 模式 | 快捷键 | 功能 |
-| --- | --- | --- |
-| Normal | `<leader>mt` | 将剪贴板表格转换为 Markdown |
-| Visual | `<leader>mt` | 将选区转换为 Markdown |
-| Normal | `<leader>mh` | 强制读取 HTML 剪贴板并转换 |
-| Normal | `<leader>mf` | 格式化光标所在 Markdown 表格 |
+| Mode   | Keymap       | Description                                             |
+|--------|--------------|---------------------------------------------------------|
+| Normal | `<leader>mt` | Convert a table from the system clipboard into Markdown |
+| Visual | `<leader>mt` | Convert the selected text into a Markdown table         |
+| Normal | `<leader>mh` | Force HTML clipboard parsing and convert the table      |
+| Normal | `<leader>mf` | Format the Markdown table under the cursor              |
 
-也可以使用命令：
+ 
 
-- `:MarkdownTable`：转换剪贴板表格。
-- `:MarkdownTableHTML`：强制读取 HTML 剪贴板。
-- `:MarkdownTableVisual`：转换 Visual 选区。
-- `:MarkdownTableFormat`：格式化当前 Markdown 表格。
+You can also use the following commands：
 
-## 配置
+- :MarkdownTable — Convert a table from the system clipboard.
+- :MarkdownTableHTML — Force HTML clipboard parsing.
+- :MarkdownTableVisual — Convert the current Visual selection.
+- :MarkdownTableFormat — Format the Markdown table under the cursor.
+
+## Configuration
 
 ```lua
 require("markdown_table").setup({
@@ -69,36 +88,36 @@ require("markdown_table").setup({
 })
 ```
 
-将某个快捷键设为 `false` 或 `nil` 可关闭对应映射。若不希望插件覆盖已有映射，可将 `mappings` 设为空表。
+Set an individual mapping to `false` or `nil` to disable it. To prevent the plugin from defining any default keymaps, set mappings to an empty table.
 
-## 剪贴板 HTML 支持
+## HTML Clipboard Support
 
-插件优先读取 HTML 剪贴板格式，以保留网页表格结构；如果不可用，则回退到 Neovim `+` 寄存器中的纯文本。
+The plugin prioritizes HTML clipboard data to preserve the structure of tables copied from web pages. If HTML data is unavailable, it falls back to plain text from Neovim's + register.
 
-- macOS：使用系统自带的 `pbpaste -Prefer html`。
-- Wayland：使用 `wl-paste --type text/html`。
-- X11：使用 `xclip -selection clipboard -t text/html -o`。
-- Windows：尝试使用 PowerShell 与 Windows Forms 读取 HTML 格式。
+- macOS: Uses the built-in `pbpaste -Prefer html` command.
+- Wayland: Uses `wl-paste --type text/html`.
+- X11: Uses `xclip -selection clipboard -t text/html -o`.
+- Windows: Attempts to retrieve HTML clipboard data through PowerShell and Windows Forms.
 
-如果 HTML 格式不可用，网页复制的 TSV 纯文本仍可正常转换。
+If HTML clipboard data is unavailable, plain-text TSV data copied from web pages can still be converted.
 
-## Visual 模式
+## Visual Mode
 
-选中 TSV、CSV、HTML 或 Markdown 表格文本，再按 `<leader>mt`。行选择适合完整表格；字符选择会只替换选中的字符范围。
+Select text containing a TSV, CSV, HTML, or Markdown table, then press <leader>mt.
 
-## 测试
+## Testing
 
-在项目根目录运行：
+Run the following command from the project root directory:
 
 ```sh
 nvim --headless -u NONE -l tests/run.lua
 ```
 
-## 限制
+## Limitations
 
-- HTML 解析器针对常见网页表格设计，不是完整的浏览器 DOM 实现。
-- 复杂 CSS 布局、JavaScript 动态表格和嵌套表格不保证完全还原。
-- 剪贴板 HTML 格式读取取决于操作系统剪贴板工具是否可用。
+- The HTML parser is designed for common web tables and is not a complete browser DOM implementation.
+- Complex CSS layouts, JavaScript-generated tables, and nested tables may not be fully preserved.
+- HTML clipboard access depends on the availability of the corresponding clipboard utilities on your operating system.
 
 ## License
 
