@@ -21,9 +21,9 @@ Convert HTML, TSV, and CSV tables from your system clipboard or Visual selection
 
 - Read HTML tables from the system clipboard (preferred), with automatic fallback to plain-text TSV/CSV.
 - Convert HTML, TSV, and CSV data from Visual selections.
-- Automatically calculate column widths using strdisplaywidth() to correctly handle CJK and other wide characters.
-- Handle HTML entities, inline cell tags, rowspan / colspan, CSV quoting, and escaped commas.
-- Escape | characters in Markdown cells and convert cell line breaks to <br>.
+- Automatically calculate column widths using `strdisplaywidth()` to correctly handle CJK and other wide characters.
+- Handle HTML entities, inline cell tags, `rowspan` / `colspan`, CSV quoting, and escaped commas.
+- Escape `|` characters in Markdown cells and convert cell line breaks to `<br>`.
 - Format the Markdown table under the cursor while preserving column alignment
 markers.
 
