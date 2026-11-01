@@ -1,5 +1,18 @@
 # markdown-table.nvim
 
+- [功能](#功能)
+- [安装](#安装)
+    - [Neovim 原生 vim.pack](#neovim-原生-vimpack)
+    - [lazy.nvim](#lazynvim)
+- [默认快捷键](#默认快捷键)
+- [配置](#配置)
+- [剪贴板 HTML 支持](#剪贴板-html-支持)
+- [Visual 模式](#visual-模式)
+- [测试](#测试)
+- [限制](#限制)
+- [License](#license)
+
+
 将系统剪贴板或 Visual 选区中的 HTML、TSV、CSV 表格转换为排版整齐的 Markdown 表格，并格式化已有 Markdown 表格。
 
 ## 功能

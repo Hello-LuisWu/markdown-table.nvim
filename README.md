@@ -1,19 +1,18 @@
 # markdown-table.nvim
 
-- [markdown-table.nvim](#markdown-table.nvim)
-  - [Features](#features)
-  - [Installation](#installation)
+- [Features](#features)
+- [Installation](#installation)
     - [Native vim.pack](#native-vimpack)
     - [lazy.nvim](#lazynvim)
-  - [Default Keymaps](#default-keymaps)
-  - [Configuration](#configuration)
-  - [HTML Clipboard Support](#html-clipboard-support)
-  - [Visual Mode](#visual-mode)
-  - [Testing](#testing)
-  - [Limitations](#limitations)
-  - [License](#license)
+- [Default Keymaps](#default-keymaps)
+- [Configuration](#configuration)
+- [HTML Clipboard Support](#html-clipboard-support)
+- [Visual Mode](#visual-mode)
+- [Testing](#testing)
+- [Limitations](#limitations)
+- [License](#license)
 
-> 中文用户可以通过 [README.zh-CN.md](./README.zh-CN.md) 阅读中文说明。
+> 中文用户可以通过 [README-zh.md](./README-zh.md) 阅读中文说明。
 
 Convert HTML, TSV, and CSV tables from your system clipboard or Visual selection into neatly formatted Markdown tables. Also supports formatting existing Markdown tables.
 
