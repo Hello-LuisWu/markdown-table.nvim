@@ -23,8 +23,7 @@ Convert HTML, TSV, and CSV tables from your system clipboard or Visual selection
 - Automatically calculate column widths using `strdisplaywidth()` to correctly handle CJK and other wide characters.
 - Handle HTML entities, inline cell tags, `rowspan` / `colspan`, CSV quoting, and escaped commas.
 - Escape `|` characters in Markdown cells and convert cell line breaks to `<br>`.
-- Format the Markdown table under the cursor while preserving column alignment
-markers.
+- Format the Markdown table under the cursor while preserving column alignment markers.
 
 No dependencies on lazy.nvim, plenary.nvim, or any other plugins.
 
@@ -34,7 +33,7 @@ No dependencies on lazy.nvim, plenary.nvim, or any other plugins.
 
 ```lua
 vim.pack.add({
-  "https://github.com/Hello-LuisWu/markdown-table.nvim",
+    "https://github.com/Hello-LuisWu/markdown-table.nvim",
 })
 
 require("markdown_table").setup({})
@@ -43,24 +42,24 @@ require("markdown_table").setup({})
 ### lazy.nvim
 
 ```lua
-{
-  "Hello-LuisWu/markdown-table.nvim",
-  config = function()
-    require("markdown_table").setup({})
-  end,
+return{
+    "Hello-LuisWu/markdown-table.nvim",
+    config = function()
+        require("markdown_table").setup({})
+    end,
 }
 ```
 
 ## Default Keymaps
 
 | Mode   | Keymap       | Description                                             |
-|--------|--------------|---------------------------------------------------------|
+| :----- | :----------- | :------------------------------------------------------ |
 | Normal | `<leader>mt` | Convert a table from the system clipboard into Markdown |
 | Visual | `<leader>mt` | Convert the selected text into a Markdown table         |
 | Normal | `<leader>mh` | Force HTML clipboard parsing and convert the table      |
 | Normal | `<leader>mf` | Format the Markdown table under the cursor              |
 
- 
+
 
 You can also use the following commands：
 
@@ -73,17 +72,17 @@ You can also use the following commands：
 
 ```lua
 require("markdown_table").setup({
-  mappings = {
-    convert = "<leader>mt",
-    html = "<leader>mh",
-    format = "<leader>mf",
-  },
-  clipboard = {
-    prefer_html = true,
-  },
-  default_alignment = "left", -- left | center | right
-  min_column_width = 3,
-  notify = true,
+    mappings = {
+        convert = "<leader>mt",
+        html = "<leader>mh",
+        format = "<leader>mf",
+    },
+    clipboard = {
+        prefer_html = true,
+    },
+    default_alignment = "left", -- left | center | right
+    min_column_width = 3,
+    notify = true,
 })
 ```
 
@@ -102,7 +101,7 @@ If HTML clipboard data is unavailable, plain-text TSV data copied from web pages
 
 ## Visual Mode
 
-Select text containing a TSV, CSV, HTML, or Markdown table, then press <leader>mt.
+Select text containing a TSV, CSV, HTML, or Markdown table, then press `<leader>mt`.
 
 ## Testing
 
@@ -120,4 +119,4 @@ nvim --headless -u NONE -l tests/run.lua
 
 ## License
 
-MIT
+[MIT](./LICENSE)

@@ -31,7 +31,7 @@
 
 ```lua
 vim.pack.add({
-  "https://github.com/Hello-LuisWu/markdown-table.nvim",
+    "https://github.com/Hello-LuisWu/markdown-table.nvim",
 })
 
 require("markdown_table").setup({})
@@ -40,21 +40,21 @@ require("markdown_table").setup({})
 ### lazy.nvim
 
 ```lua
-{
-  "Hello-LuisWu/markdown-table.nvim",
-  config = function()
-    require("markdown_table").setup({})
-  end,
+return{
+    "Hello-LuisWu/markdown-table.nvim",
+    config = function()
+        require("markdown_table").setup({})
+    end,
 }
 ```
 
 ## 默认快捷键
 
-| 模式 | 快捷键 | 功能 |
-| --- | --- | --- |
-| Normal | `<leader>mt` | 将剪贴板表格转换为 Markdown |
-| Visual | `<leader>mt` | 将选区转换为 Markdown |
-| Normal | `<leader>mh` | 强制读取 HTML 剪贴板并转换 |
+| 模式   | 快捷键       | 功能                         |
+| :----- | :----------- | :--------------------------- |
+| Normal | `<leader>mt` | 将剪贴板表格转换为 Markdown  |
+| Visual | `<leader>mt` | 将选区转换为 Markdown        |
+| Normal | `<leader>mh` | 强制读取 HTML 剪贴板并转换   |
 | Normal | `<leader>mf` | 格式化光标所在 Markdown 表格 |
 
 也可以使用命令：
@@ -68,17 +68,17 @@ require("markdown_table").setup({})
 
 ```lua
 require("markdown_table").setup({
-  mappings = {
-    convert = "<leader>mt",
-    html = "<leader>mh",
-    format = "<leader>mf",
-  },
-  clipboard = {
-    prefer_html = true,
-  },
-  default_alignment = "left", -- left | center | right
-  min_column_width = 3,
-  notify = true,
+    mappings = {
+        convert = "<leader>mt",
+        html = "<leader>mh",
+        format = "<leader>mf",
+    },
+    clipboard = {
+        prefer_html = true,
+    },
+    default_alignment = "left", -- left | center | right
+    min_column_width = 3,
+    notify = true,
 })
 ```
 
@@ -115,4 +115,4 @@ nvim --headless -u NONE -l tests/run.lua
 
 ## License
 
-MIT
+[MIT](./LICENSE)
